@@ -1,5 +1,7 @@
 package com.course.testng.muliThread;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -11,12 +13,12 @@ public class MultThreadOnXml {
         System.out.printf("Thread Id : %s%n",Thread.currentThread().getId());
     }
 
-    @Test
+    @AfterMethod
     public void test2(){
         System.out.printf("Thread Id : %s%n",Thread.currentThread().getId());
     }
 
-    @Test
+    @BeforeTest
     public void test3(){
         System.out.printf("Thread Id : %s%n",Thread.currentThread().getId());
     }

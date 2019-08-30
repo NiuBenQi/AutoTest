@@ -15,6 +15,7 @@ public class DataProviderTest {
         System.out.println("name ="+ name+";age="+age);
     }
 
+    // 数据来源
     @DataProvider(name = "data")
     public Object[][] providerData(){
         Object[][] o = new Object[][]{
