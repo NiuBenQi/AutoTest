@@ -3,17 +3,18 @@
     "description":"这是一个会返回cookies信息的get请求",
     "request":{
       "uri":"/getCookies",
-      "method":"get"
-    },
-    "response":{
+      "method":"get",
       "cookies":{
         "login":"true"
       }
     },
-    "text":"恭喜获得cookies信息"
+    "response":{
+      "text":"恭喜获得cookies信息",
+      "headers":{
+        "Content-Type":"text/html;charset=gbk"
+      }
+    }
   },
-
-
   {
     "description":"模拟一个带cookies信息的get请求",
     "request":{
@@ -24,7 +25,10 @@
       }
     },
     "response":{
-      "text":"这是一个需要携带cookies信息的get请求"
+      "text":"这是一个需要携带cookies信息的get请求",
+      "headers":{
+        "Content-Type":"text/html;charset=gbk"
+      }
     }
   },
   {
@@ -44,7 +48,10 @@
       "status":200,
       "json":{
         "huhansan":"胡汉三带参数来了！！！",
-        "success":1
+        "status":1
+      },
+      "headers":{
+        "Content-Type":"text/html;charset=gbk"
       }
 
     }

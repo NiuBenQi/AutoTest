@@ -11,13 +11,18 @@
     "request":{
       "uri":"/redirect/topath"
     },
-    "redirectTo":""
+    "redirectTo":"/redirect/new"
   },
   {
-    "description":"重定向到到请求",
+    "description":"这是被重定向到的请求",
     "request":{
       "uri":"/redirect/new"
     },
-    "response":"重定向成功了"
+    "response":{
+      "text":"重定向成功了",
+      "headers":{
+        "Content-Type":"text/html;charset=gbk"
+      }
+    }
   }
 ]
