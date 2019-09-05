@@ -1,6 +1,7 @@
-package com.course.httpclient.demo.Cookies;
+package com.course.httpclient.Cookies;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -24,14 +25,15 @@ import java.util.ResourceBundle;
 public class MyCookiesForPost {
     private String url;
     private ResourceBundle bundle;
-    private CookeiStore store;
+    private CookieStore store;
+
     @BeforeTest
     public void beforeTest(){
         bundle = ResourceBundle.getBundle("application", Locale.CHINA);
         url = bundle.getString("test.url");
 
-
     }
+
     @Test
     public void testGetCookies() throws IOException {
         String result;
@@ -41,14 +43,14 @@ public class MyCookiesForPost {
 
         // 测试逻辑代码书写
         HttpGet get = new HttpGet(testUrl);
-        HttpClient client = new DefaultHttpClient();
+        DefaultHttpClient client = new DefaultHttpClient();
         HttpResponse response = client.execute(get);
         result= EntityUtils.toString(response.getEntity(),"utf-8");
         System.out.println(result);
 
 
         // 获取cookie信息
-        this.store= client.getCookieStore();
+        this.store=  client.getCookieStore();
         List<Cookie> cookieList = this.store.getCookies();
         for(Cookie cookie : cookieList){
             String name = cookie.getName();
@@ -67,12 +69,12 @@ public class MyCookiesForPost {
         DefaultHttpClient client = new DefaultHttpClient();
 
         //声明一个方法，post方法
-        HttpPost post = new HttpPost();
+        HttpPost post = new HttpPost(testUrl);
 
         //添加参数
         JSONObject param = new JSONObject();
         param.put("name","huhansan");
-        param.put("age","18");
+        param.put("sex","man");
 
         //设置请求头信息 设置header
         post.setHeader("content-type","application/json");
@@ -100,11 +102,12 @@ public class MyCookiesForPost {
         JSONObject resultjson = new JSONObject(result);
 
         //获取到结果值
-        String success = (String) resultjson.get("huhansan");
-        String status = (String) resultjson.get("status");
+        String success = resultjson.get("huhansan").toString();
+        String status =  resultjson.get("status").toString();
         //具体的判断返回结果的值
+//        System.out.println(success+status);
         Assert.assertEquals("success",success);
-        Assert.assertEquals("status",status);
+        Assert.assertEquals("1",status);
     }
 
 }

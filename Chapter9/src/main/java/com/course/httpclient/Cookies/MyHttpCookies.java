@@ -1,7 +1,8 @@
-package com.course.httpclient.demo.Cookies;
+package com.course.httpclient.Cookies;
 
 import org.apache.http.HttpResponse;
 
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.cookie.Cookie;
@@ -22,12 +23,12 @@ public class MyHttpCookies {
 
     private String url;
     private ResourceBundle bundle;
-    private CookeiStore store;
+    private CookieStore store;
+    //加载配置文件
     @BeforeTest
     public void beforeTest(){
         bundle = ResourceBundle.getBundle("application", Locale.CHINA);
         url = bundle.getString("test.url");
-
     }
 
     @Test
@@ -39,23 +40,24 @@ public class MyHttpCookies {
 
         // 测试逻辑代码书写
         HttpGet get = new HttpGet(testUrl);
-        HttpClient client = new DefaultHttpClient();
+        DefaultHttpClient client = new DefaultHttpClient();
         HttpResponse response = client.execute(get);
         result= EntityUtils.toString(response.getEntity(),"utf-8");
         System.out.println(result);
 
-
         // 获取cookie信息
-         this.store= client.getCookieStore();
+         this.store = client.getCookieStore();
         List<Cookie> cookieList = this.store.getCookies();
         for(Cookie cookie : cookieList){
             String name = cookie.getName();
             String value = cookie.getValue();
             System.out.println("cookie name = "+name
-                    +"cookie value = "+value);
+                    +";  cookie value = "+value);
         }
     }
-    @Test(dependsOnMethods = {"testGetCookies"}) // 依赖 testGetCookies
+
+    // 依赖 testGetCookies
+    @Test(dependsOnMethods = {"testGetCookies"})
     public void testGetWithCookies() throws IOException {
         String uri = bundle.getString("test.get.with.cookies");
         String testUrl = this.url+uri;
