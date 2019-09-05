@@ -28,8 +28,8 @@ public class MyHttpCookies {
         bundle = ResourceBundle.getBundle("application", Locale.CHINA);
         url = bundle.getString("test.url");
 
-
     }
+
     @Test
     public void testGetCookies() throws IOException {
         String result;
