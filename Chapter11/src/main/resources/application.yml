@@ -10,7 +10,7 @@ spring:
     name: myTest
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.240.40.186
+    url: jdbc:mysql://IP:端口号//服务名
     username: admin
     password: admin
 
